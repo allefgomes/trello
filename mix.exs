@@ -1,16 +1,32 @@
 defmodule Trello.MixProject do
   use Mix.Project
 
+  @github_url "https://github.com/allefgomes/trello"
+
   def project do
     [
       app: :trello,
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      description: "Trello Clone Project",
+      source_url: @github_url,
+      homepage_url: @github_url,
+      package: [
+        maintainers: ["Allef Gomes"],
+        licenses: ["MIT"],
+        links: %{
+          "GitHub" => @github_url
+        }
+      ],
+      docs: [
+        main: "readme",
+        extras: ["Readme.md", "CHANGELOG.md", "https://whimsical.com/trello-EgMc4Tyw9JKcFYrFJBURna@2Ux7TurymN6Kt9u5T1Bs"]
+      ]
     ]
   end
 
