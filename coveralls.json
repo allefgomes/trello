@@ -1,0 +1,15 @@
+{
+  "skip_files": [
+    "lib/trello/application.ex",
+    "lib/trello_web.ex",
+    "lib/trello_web/views/error_helpers.ex",
+    "test/support/channel_case.ex",
+    "test/support/data_case.ex",
+    "lib/trello_web/telemetry.ex"
+  ],
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/",
+    "minimum_coverage": 90
+  }
+}

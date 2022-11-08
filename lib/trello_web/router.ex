@@ -10,15 +10,17 @@ defmodule TrelloWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   scope "/", TrelloWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
+
+  # coveralls-ignore-start
 
   # Other scopes may use custom stacks.
   # scope "/api", TrelloWeb do
@@ -41,6 +43,8 @@ defmodule TrelloWeb.Router do
       live_dashboard "/dashboard", metrics: TrelloWeb.Telemetry
     end
   end
+
+  # coveralls-ignore-stop
 
   # Enables the Swoosh mailbox preview in development.
   #

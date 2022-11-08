@@ -25,7 +25,18 @@ defmodule Trello.MixProject do
       ],
       docs: [
         main: "readme",
-        extras: ["Readme.md", "CHANGELOG.md", "https://whimsical.com/trello-EgMc4Tyw9JKcFYrFJBURna@2Ux7TurymN6Kt9u5T1Bs"]
+        extras: [
+          "Readme.md",
+          "CHANGELOG.md",
+          "https://whimsical.com/trello-EgMc4Tyw9JKcFYrFJBURna@2Ux7TurymN6Kt9u5T1Bs"
+        ]
+      ],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
       ]
     ]
   end
@@ -64,7 +75,11 @@ defmodule Trello.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.8", only: :dev},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 
