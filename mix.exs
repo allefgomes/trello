@@ -25,7 +25,11 @@ defmodule Trello.MixProject do
       ],
       docs: [
         main: "readme",
-        extras: ["Readme.md", "CHANGELOG.md", "https://whimsical.com/trello-EgMc4Tyw9JKcFYrFJBURna@2Ux7TurymN6Kt9u5T1Bs"]
+        extras: [
+          "Readme.md",
+          "CHANGELOG.md",
+          "https://whimsical.com/trello-EgMc4Tyw9JKcFYrFJBURna@2Ux7TurymN6Kt9u5T1Bs"
+        ]
       ]
     ]
   end
