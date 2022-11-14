@@ -7,11 +7,11 @@ defmodule Trello.Repo.Migrations.CreateBoards do
       add :name, :string
       add :active, :boolean, default: false, null: false
       add :background, :string
-      add :owner, references(:users, on_delete: :nothing, type: :binary_id)
+      add :creator_id, references(:users, on_delete: :nothing, type: :binary_id)
 
       timestamps()
     end
 
-    create index(:boards, [:owner])
+    create index(:boards, [:creator_id])
   end
 end
