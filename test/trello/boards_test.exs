@@ -35,7 +35,12 @@ defmodule Trello.BoardsTest do
 
     test "update_board/2 with valid data updates the board" do
       board = board_fixture()
-      update_attrs = %{active: false, background: "some updated background", name: "some updated name"}
+
+      update_attrs = %{
+        active: false,
+        background: "some updated background",
+        name: "some updated name"
+      }
 
       assert {:ok, %Board{} = board} = Boards.update_board(board, update_attrs)
       assert board.active == false
