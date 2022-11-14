@@ -11,7 +11,7 @@ defmodule TrelloWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ "<h1 class=\"font-bold text-2xl antialiased\">Log in</h1>"
       assert response =~ "Register</a>"
       assert response =~ "Forgot your password?</a>"
     end
@@ -26,7 +26,11 @@ defmodule TrelloWeb.UserSessionControllerTest do
     test "logs the user in", %{conn: conn, user: user} do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
-          "user" => %{"name" => user.name, "email" => user.email, "password" => valid_user_password()}
+          "user" => %{
+            "name" => user.name,
+            "email" => user.email,
+            "password" => valid_user_password()
+          }
         })
 
       assert get_session(conn, :user_token)
@@ -75,7 +79,7 @@ defmodule TrelloWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ "<h1 class=\"font-bold text-2xl antialiased\">Log in</h1>"
       assert response =~ "Invalid email or password"
     end
   end

@@ -60,7 +60,8 @@ defmodule Trello.AccountsTest do
     end
 
     test "validates name, email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{name: "a", email: "not valid", password: "not valid"})
+      {:error, changeset} =
+        Accounts.register_user(%{name: "a", email: "not valid", password: "not valid"})
 
       assert %{
                name: ["should be at least 2 character(s)"],
@@ -72,7 +73,8 @@ defmodule Trello.AccountsTest do
     test "validates maximum values for name, email and password for security" do
       too_long = String.duplicate("db", 100)
 
-      {:error, changeset} = Accounts.register_user(%{name: too_long, email: too_long, password: too_long})
+      {:error, changeset} =
+        Accounts.register_user(%{name: too_long, email: too_long, password: too_long})
 
       assert "should be at most 160 character(s)" in errors_on(changeset).name
       assert "should be at most 160 character(s)" in errors_on(changeset).email
