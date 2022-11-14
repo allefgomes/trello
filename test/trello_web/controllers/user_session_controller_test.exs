@@ -26,7 +26,7 @@ defmodule TrelloWeb.UserSessionControllerTest do
     test "logs the user in", %{conn: conn, user: user} do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
-          "user" => %{"email" => user.email, "password" => valid_user_password()}
+          "user" => %{"name" => user.name, "email" => user.email, "password" => valid_user_password()}
         })
 
       assert get_session(conn, :user_token)
@@ -35,8 +35,8 @@ defmodule TrelloWeb.UserSessionControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ user.email
-      assert response =~ "Settings</a>"
+      assert response =~ user.name
+      assert response =~ "#{user.name}</a>"
       assert response =~ "Log out</a>"
     end
 

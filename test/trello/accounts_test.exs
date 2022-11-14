@@ -53,23 +53,28 @@ defmodule Trello.AccountsTest do
       {:error, changeset} = Accounts.register_user(%{})
 
       assert %{
+               name: ["can't be blank"],
                password: ["can't be blank"],
                email: ["can't be blank"]
              } = errors_on(changeset)
     end
 
-    test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
+    test "validates name, email and password when given" do
+      {:error, changeset} = Accounts.register_user(%{name: "a", email: "not valid", password: "not valid"})
 
       assert %{
+               name: ["should be at least 2 character(s)"],
                email: ["must have the @ sign and no spaces"],
                password: ["should be at least 12 character(s)"]
              } = errors_on(changeset)
     end
 
-    test "validates maximum values for email and password for security" do
+    test "validates maximum values for name, email and password for security" do
       too_long = String.duplicate("db", 100)
-      {:error, changeset} = Accounts.register_user(%{email: too_long, password: too_long})
+
+      {:error, changeset} = Accounts.register_user(%{name: too_long, email: too_long, password: too_long})
+
+      assert "should be at most 160 character(s)" in errors_on(changeset).name
       assert "should be at most 160 character(s)" in errors_on(changeset).email
       assert "should be at most 72 character(s)" in errors_on(changeset).password
     end
@@ -97,7 +102,7 @@ defmodule Trello.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :email]
+      assert changeset.required == [:password, :email, :name]
     end
 
     test "allows fields to be set" do

@@ -5,6 +5,7 @@ defmodule Trello.Accounts.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
+    field :name, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
@@ -31,9 +32,16 @@ defmodule Trello.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_name()
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, min: 2, max: 160)
   end
 
   defp validate_email(changeset) do
