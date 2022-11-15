@@ -4,6 +4,21 @@ defmodule Trello.BoardsFixtures do
   entities via the `Trello.Boards` context.
   """
 
+  import Trello.AccountsFixtures
+
+
+  @doc """
+  Generate attributes map for new board
+  """
+  def valid_board_attributes(attrs \\ %{}) do
+    Enum.into(attrs, %{
+      name: "sample name",
+      status: true,
+      background: "#fcc",
+      creator_id: valid_creator_id()
+    })
+  end
+
   @doc """
   Generate a board.
   """
@@ -12,11 +27,20 @@ defmodule Trello.BoardsFixtures do
       attrs
       |> Enum.into(%{
         active: true,
-        background: "some background",
-        name: "some name"
+        background: "#ccc",
+        name: "some name",
+        creator_id: valid_creator_id()
       })
       |> Trello.Boards.create_board()
 
     board
+  end
+
+  defp valid_creator_id do
+    user_created = user_fixture()
+
+    creator = Trello.Repo.get!(Trello.Boards.Creator, user_created.id)
+
+    creator.id
   end
 end

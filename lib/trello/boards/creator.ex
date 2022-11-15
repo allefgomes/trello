@@ -6,7 +6,5 @@ defmodule Trello.Boards.Creator do
   schema "users" do
     field :email, :string
     field :name, :string
-
-    timestamps()
   end
 end

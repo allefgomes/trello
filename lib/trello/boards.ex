@@ -13,12 +13,16 @@ defmodule Trello.Boards do
 
   ## Examples
 
-      iex> list_boards()
+      iex> list_boards(creator_id)
       [%Board{}, ...]
 
   """
-  def list_boards do
-    Repo.all(Board)
+  def list_boards(creator_id) do
+    query = from b in Board,
+      where: b.creator_id == ^creator_id,
+      order_by: b.updated_at
+
+    Repo.all(query)
   end
 
   @doc """

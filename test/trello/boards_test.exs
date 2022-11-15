@@ -7,12 +7,14 @@ defmodule Trello.BoardsTest do
     alias Trello.Boards.Board
 
     import Trello.BoardsFixtures
+    import Trello.AccountsFixtures
 
-    @invalid_attrs %{active: nil, background: nil, name: nil}
+    @invalid_attrs %{active: nil, background: nil, name: nil, creator_id: nil}
 
     test "list_boards/0 returns all boards" do
       board = board_fixture()
-      assert Boards.list_boards() == [board]
+
+      assert Boards.list_boards(board.creator_id) == [board]
     end
 
     test "get_board!/1 returns the board with given id" do
@@ -21,12 +23,15 @@ defmodule Trello.BoardsTest do
     end
 
     test "create_board/1 with valid data creates a board" do
-      valid_attrs = %{active: true, background: "some background", name: "some name"}
+      user = user_fixture()
+
+      valid_attrs = %{active: true, background: "some background", name: "some name", creator_id: user.id}
 
       assert {:ok, %Board{} = board} = Boards.create_board(valid_attrs)
       assert board.active == true
       assert board.background == "some background"
       assert board.name == "some name"
+      assert board.creator_id == user.id
     end
 
     test "create_board/1 with invalid data returns error changeset" do

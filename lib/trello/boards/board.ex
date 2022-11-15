@@ -19,7 +19,7 @@ defmodule Trello.Boards.Board do
   @doc false
   def changeset(board, attrs) do
     board
-    |> cast(attrs, [:name, :active, :background])
-    |> validate_required([:name, :active, :background])
+    |> cast(attrs, [:name, :active, :background, :creator_id])
+    |> validate_required([:name, :active, :background, :creator_id])
   end
 end
