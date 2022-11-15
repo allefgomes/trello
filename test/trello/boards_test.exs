@@ -25,7 +25,12 @@ defmodule Trello.BoardsTest do
     test "create_board/1 with valid data creates a board" do
       user = user_fixture()
 
-      valid_attrs = %{active: true, background: "some background", name: "some name", creator_id: user.id}
+      valid_attrs = %{
+        active: true,
+        background: "some background",
+        name: "some name",
+        creator_id: user.id
+      }
 
       assert {:ok, %Board{} = board} = Boards.create_board(valid_attrs)
       assert board.active == true

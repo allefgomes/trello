@@ -18,9 +18,10 @@ defmodule Trello.Boards do
 
   """
   def list_boards(creator_id) do
-    query = from b in Board,
-      where: b.creator_id == ^creator_id,
-      order_by: b.updated_at
+    query =
+      from b in Board,
+        where: b.creator_id == ^creator_id,
+        order_by: b.updated_at
 
     Repo.all(query)
   end

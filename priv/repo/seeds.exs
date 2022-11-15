@@ -10,14 +10,16 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-{:ok, user} = %{
-  name: "user",
-  email: "user@example.com",
-  password: "1234123412341234"
-}
-|> Trello.Accounts.register_user()
+{:ok, user} =
+  %{
+    name: "user",
+    email: "user@example.com",
+    password: "1234123412341234"
+  }
+  |> Trello.Accounts.register_user()
 
 user = Trello.Repo.one!(Trello.Boards.Creator)
+
 1..20
 |> Enum.map(fn n ->
   Trello.Boards.create_board(%{

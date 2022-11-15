@@ -6,7 +6,6 @@ defmodule Trello.BoardsFixtures do
 
   import Trello.AccountsFixtures
 
-
   @doc """
   Generate attributes map for new board
   """

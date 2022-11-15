@@ -11,7 +11,8 @@ defmodule TrelloWeb.BoardontrollerTest do
 
       conn = get(conn, Routes.board_path(conn, :index))
 
-      assert html_response(conn, 200) =~ "<h1 class=\"font-bold text-2xl antialiased\">Your Boards</h1>"
+      assert html_response(conn, 200) =~
+               "<h1 class=\"font-bold text-2xl antialiased\">Your Boards</h1>"
     end
   end
 
@@ -19,7 +20,8 @@ defmodule TrelloWeb.BoardontrollerTest do
     test "render a page to create a new board", %{conn: conn} do
       conn = get(conn, Routes.board_path(conn, :new))
 
-      assert html_response(conn, 200) =~ "<h1 class=\"font-bold text-2xl antialiased\">New Board</h1>"
+      assert html_response(conn, 200) =~
+               "<h1 class=\"font-bold text-2xl antialiased\">New Board</h1>"
     end
   end
 
