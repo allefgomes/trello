@@ -27,14 +27,14 @@ defmodule Trello.BoardsTest do
 
       valid_attrs = %{
         active: true,
-        background: "some background",
+        background: "#cfc",
         name: "some name",
         creator_id: user.id
       }
 
       assert {:ok, %Board{} = board} = Boards.create_board(valid_attrs)
       assert board.active == true
-      assert board.background == "some background"
+      assert board.background == "#cfc"
       assert board.name == "some name"
       assert board.creator_id == user.id
     end
@@ -43,18 +43,34 @@ defmodule Trello.BoardsTest do
       assert {:error, %Ecto.Changeset{}} = Boards.create_board(@invalid_attrs)
     end
 
+    test "create_board/1 with invalid background format returns error changeset" do
+      user = user_fixture()
+
+      attrs = %{
+        active: true,
+        background: "some background",
+        name: "some name",
+        creator_id: user.id
+      }
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Boards.create_board(attrs)
+
+      assert %{background: ["has invalid format. Please enter with an hex color."]} =
+               errors_on(changeset)
+    end
+
     test "update_board/2 with valid data updates the board" do
       board = board_fixture()
 
       update_attrs = %{
         active: false,
-        background: "some updated background",
+        background: "#c0c",
         name: "some updated name"
       }
 
       assert {:ok, %Board{} = board} = Boards.update_board(board, update_attrs)
       assert board.active == false
-      assert board.background == "some updated background"
+      assert board.background == "#c0c"
       assert board.name == "some updated name"
     end
 
