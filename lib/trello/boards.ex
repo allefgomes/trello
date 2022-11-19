@@ -60,7 +60,6 @@ defmodule Trello.Boards do
   # |> preload(lists: :cards)
   # |> Repo.all
 
-
   # import Ecto.Query, warn: false
   # alias Trello.Repo
 

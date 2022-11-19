@@ -37,14 +37,15 @@ user = Trello.Repo.one!(Trello.Boards.Creator)
       |> Ecto.build_assoc(:lists, title: board_title)
       |> Trello.Repo.insert!()
 
-      if board_title == "To do" do
-        counter = Enum.random([2, 3, 4, 5, 10, 15, 25])
-        1..counter
-        |> Enum.map(fn l ->
-          list
-          |> Ecto.build_assoc(:cards, title: "Card #{l}")
-          |> Trello.Repo.insert!()
-        end)
-      end
+    if board_title == "To do" do
+      counter = Enum.random([2, 3, 4, 5, 10, 15, 25])
+
+      1..counter
+      |> Enum.map(fn l ->
+        list
+        |> Ecto.build_assoc(:cards, title: "Card #{l}")
+        |> Trello.Repo.insert!()
+      end)
+    end
   end)
 end)

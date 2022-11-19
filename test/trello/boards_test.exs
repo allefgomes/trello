@@ -96,7 +96,6 @@ defmodule Trello.CardsTest do
       assert created_board.active == board.active
       assert created_board.background == board.background
       assert created_board.creator_id == board.creator_id
-
     end
 
     test "delete_board/1 deletes the board" do

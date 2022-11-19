@@ -126,7 +126,7 @@ defmodule Trello.Accounts.UserToken do
       # coveralls-ignore-start
       :error ->
         :error
-      # coveralls-ignore-stop
+        # coveralls-ignore-stop
     end
   end
 
@@ -161,7 +161,7 @@ defmodule Trello.Accounts.UserToken do
       # coveralls-ignore-start
       :error ->
         :error
-      # coveralls-ignore-stop
+        # coveralls-ignore-stop
     end
   end
 

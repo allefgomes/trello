@@ -26,7 +26,7 @@ defmodule TrelloWeb.BoardontrollerTest do
   end
 
   describe "POST /boards" do
-    test "creates account and logs the user in", %{conn: conn, user: user} do
+    test "create a new board when send valid data", %{conn: conn, user: user} do
       conn =
         post(conn, Routes.board_path(conn, :create), %{
           "board" => valid_board_attributes(creator_id: user.id)
@@ -45,9 +45,9 @@ defmodule TrelloWeb.BoardontrollerTest do
       conn =
         post(conn, Routes.board_path(conn, :create), %{
           "board" => %{
-            "name" => "",
+            "name" => nil,
             "status" => nil,
-            "background" => "",
+            "background" => nil,
             "creator_id" => nil
           }
         })
@@ -56,4 +56,34 @@ defmodule TrelloWeb.BoardontrollerTest do
       assert response =~ "<h1 class=\"font-bold text-2xl antialiased\">New Board</h1>"
     end
   end
+
+  # describe "GET /boards/:id" do
+  #   test "render a page to show a board with specified id", %{conn: conn, user: user} do
+  #     board = board_fixture(creator_id: user.id)
+
+  #     conn = get(conn, Routes.board_path(conn, :show, board.id))
+
+  #     assert html_response(conn, 200) =~
+  #              "<h1 class=\"font-bold text-2xl antialiased\">#{board.name}</h1>"
+  #   end
+
+  #   test "redirect to :index when board not was created from current_user", %{conn: conn} do
+  #     other_user = user_fixture()
+  #     board = board_fixture(creator_id: other_user.id)
+
+  #     conn = get(conn, Routes.board_path(conn, :show, board.id))
+
+  #     assert redirected_to(conn) == Routes.board_path(conn, :index)
+  #     assert get_flash(conn, :error) == "Board not found or you aren't creator."
+  #   end
+
+  #   test "redirect to :index when not found a board", %{conn: conn} do
+  #     invalid_id = Ecto.UUID.generate()
+
+  #     conn = get(conn, Routes.board_path(conn, :show, invalid_id))
+
+  #     assert redirected_to(conn) == Routes.board_path(conn, :index)
+  #     assert get_flash(conn, :error) == "Board not found or you aren't creator."
+  #   end
+  # end
 end

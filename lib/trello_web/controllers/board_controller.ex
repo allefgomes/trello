@@ -30,4 +30,17 @@ defmodule TrelloWeb.BoardController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  # def show(conn, %{"id" => id}) do
+  #   case Boards.get_board_by_creator!(id, conn.assigns.current_user.id) do
+  #     %Board{} = board ->
+  #       conn
+  #       |> render("show.html", board: board)
+
+  #     _ ->
+  #       conn
+  #       |> put_flash(:error, "Board not found or you aren't creator.")
+  #       |> redirect(to: Routes.board_path(conn, :index))
+  #   end
+  # end
 end
