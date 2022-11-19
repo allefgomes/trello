@@ -1,8 +1,8 @@
 defmodule Trello.CardsTest do
   use Trello.DataCase
 
-  alias Trello.Boards.{Board, Card, List}
   alias Trello.Boards
+  alias Trello.Boards.{Board, Card, List}
   import Trello.{AccountsFixtures, BoardsFixtures, ListsFixtures}
 
   describe "boards" do
