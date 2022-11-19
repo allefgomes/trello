@@ -12,7 +12,7 @@ defmodule Trello.BoardsFixtures do
   def valid_board_attributes(attrs \\ %{}) do
     Enum.into(attrs, %{
       name: "sample name",
-      status: true,
+      active: true,
       background: "#fcc",
       creator_id: valid_creator_id()
     })

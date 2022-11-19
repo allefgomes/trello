@@ -6,7 +6,19 @@ defmodule Trello.Boards do
   import Ecto.Query, warn: false
   alias Trello.Repo
 
-  alias Trello.Boards.Board
+  alias Trello.Boards.{Board, Card, List}
+
+  def create_list(attrs \\ %{}) do
+    %List{}
+    |> List.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_card(attrs \\ %{}) do
+    %Card{}
+    |> Card.changeset(attrs)
+    |> Repo.insert()
+  end
 
   @doc """
   Returns the list of boards.
@@ -40,7 +52,52 @@ defmodule Trello.Boards do
       ** (Ecto.NoResultsError)
 
   """
-  def get_board!(id), do: Repo.get!(Board, id)
+  def get_board!(id), do: Repo.get!(Board, id) |> Repo.preload(lists: :cards)
+
+  # Board
+  # |> join: c in assoc(p, :comments),
+  # |> where([b], b.id == "d2d019bc-010d-4cc9-9902-f3ada676d6e1")
+  # |> preload(lists: :cards)
+  # |> Repo.all
+
+
+  # import Ecto.Query, warn: false
+  # alias Trello.Repo
+
+  # alias Trello.Boards.{Board, List, Card}
+
+  # board_id = "d2d019bc-010d-4cc9-9902-f3ada676d6e1"
+  # query = from b in Board,
+  #   join: l in assoc(b, :lists),
+  #   join: c in assoc(l, :cards),
+  #   where: b.id == ^board_id,
+  #   preload: [lists: {l, cards: c}]
+
+  # query
+  # |> Repo.one!
+
+  # d2d019bc-010d-4cc9-9902-f3ada676d6e1
+
+  @doc """
+  Gets a single board by creator_id and id.
+
+  Raises `Ecto.NoResultsError` if the Board does not exist.
+
+  ## Examples
+
+      iex> get_board!(123, 123)
+      %Board{}
+
+      iex> get_board!(456, 0)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_board_by_creator!(id, creator_id) do
+    Board
+    |> where(id: ^id)
+    |> where(creator_id: ^creator_id)
+    |> Repo.one()
+  end
 
   @doc """
   Creates a board.

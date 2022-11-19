@@ -2,7 +2,7 @@ defmodule Trello.Boards.Board do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Trello.Boards.Creator
+  alias Trello.Boards.{Creator, List}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -12,6 +12,8 @@ defmodule Trello.Boards.Board do
     field :name, :string
 
     belongs_to :creator, Creator
+
+    has_many :lists, List
 
     timestamps()
   end

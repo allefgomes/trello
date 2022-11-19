@@ -1,14 +1,11 @@
-defmodule Trello.BoardsTest do
+defmodule Trello.CardsTest do
   use Trello.DataCase
 
+  alias Trello.Boards.{Board, Card, List}
   alias Trello.Boards
+  import Trello.{AccountsFixtures, BoardsFixtures, ListsFixtures}
 
   describe "boards" do
-    alias Trello.Boards.Board
-
-    import Trello.BoardsFixtures
-    import Trello.AccountsFixtures
-
     @invalid_attrs %{active: nil, background: nil, name: nil, creator_id: nil}
 
     test "list_boards/0 returns all boards" do
@@ -17,9 +14,22 @@ defmodule Trello.BoardsTest do
       assert Boards.list_boards(board.creator_id) == [board]
     end
 
-    test "get_board!/1 returns the board with given id" do
+    test "get_board_by_creator!/1 returns the board with given id and creator_id" do
       board = board_fixture()
-      assert Boards.get_board!(board.id) == board
+
+      assert Boards.get_board_by_creator!(board.id, board.creator_id) == board
+    end
+
+    test "get_board!/1 returns the board with given id" do
+      created_board = board_fixture()
+
+      assert %Board{} = board = Boards.get_board!(created_board.id)
+
+      assert created_board.id == board.id
+      assert created_board.name == board.name
+      assert created_board.active == board.active
+      assert created_board.background == board.background
+      assert created_board.creator_id == board.creator_id
     end
 
     test "create_board/1 with valid data creates a board" do
@@ -75,9 +85,18 @@ defmodule Trello.BoardsTest do
     end
 
     test "update_board/2 with invalid data returns error changeset" do
-      board = board_fixture()
-      assert {:error, %Ecto.Changeset{}} = Boards.update_board(board, @invalid_attrs)
-      assert board == Boards.get_board!(board.id)
+      created_board = board_fixture()
+
+      assert {:error, %Ecto.Changeset{}} = Boards.update_board(created_board, @invalid_attrs)
+
+      assert %Board{} = board = Boards.get_board!(created_board.id)
+
+      assert created_board.id == board.id
+      assert created_board.name == board.name
+      assert created_board.active == board.active
+      assert created_board.background == board.background
+      assert created_board.creator_id == board.creator_id
+
     end
 
     test "delete_board/1 deletes the board" do
@@ -89,6 +108,32 @@ defmodule Trello.BoardsTest do
     test "change_board/1 returns a board changeset" do
       board = board_fixture()
       assert %Ecto.Changeset{} = Boards.change_board(board)
+    end
+
+    test "create_list/1 with valid data creates a list" do
+      %Board{} = board = board_fixture()
+
+      valid_attrs = %{
+        title: "Teste",
+        board_id: board.id
+      }
+
+      assert {:ok, %List{} = list} = Boards.create_list(valid_attrs)
+      assert list.title == "Teste"
+    end
+
+    test "create_card/1 with valid data creates a card" do
+      %List{} = list = list_fixture()
+
+      valid_attrs = %{
+        title: "Teste",
+        description: "Desc",
+        list_id: list.id
+      }
+
+      assert {:ok, %Card{} = card} = Boards.create_card(valid_attrs)
+      assert card.title == "Teste"
+      assert card.description == "Desc"
     end
   end
 end
