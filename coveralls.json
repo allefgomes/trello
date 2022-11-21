@@ -1,6 +1,7 @@
 {
   "skip_files": [
     "lib/trello/application.ex",
+    "lib/trello/release.ex",
     "lib/trello_web.ex",
     "lib/trello_web/views/error_helpers.ex",
     "test/support/channel_case.ex",

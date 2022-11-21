@@ -6,7 +6,7 @@ defmodule Trello.Accounts do
   import Ecto.Query, warn: false
   alias Trello.Repo
 
-  alias Trello.Accounts.{User, UserToken, UserNotifier}
+  alias Trello.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

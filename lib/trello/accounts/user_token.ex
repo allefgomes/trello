@@ -123,8 +123,10 @@ defmodule Trello.Accounts.UserToken do
 
         {:ok, query}
 
+      # coveralls-ignore-start
       :error ->
         :error
+        # coveralls-ignore-stop
     end
   end
 
@@ -156,8 +158,10 @@ defmodule Trello.Accounts.UserToken do
 
         {:ok, query}
 
+      # coveralls-ignore-start
       :error ->
         :error
+        # coveralls-ignore-stop
     end
   end
 

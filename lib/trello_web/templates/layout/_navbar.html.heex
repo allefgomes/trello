@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg shadow-md py-4 bg-white relative flex items-center w-full space-between">
-  <div class="px-6 w-full flex flex-wrap items-center justify-between">
-    <div class="flex items-center">
-      <%= link "TRELLO", to: Routes.page_path(@conn, :index), class: "nav-link block pr-2 lg:px-2 py-2 text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-150 ease-in-out" %>
+<nav class="navbar navbar-expand-lg shadow-md py-1 bg-white relative flex items-center w-full">
+  <div class="px-3 w-full flex justify-between">
+    <div class="">
+      <%= link "TRELLO", to: Routes.board_path(@conn, :index), class: "nav-link block pr-2 lg:px-2 py-2 text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-150 ease-in-out" %>
     </div>
 
-    <div class="navbar-collapse grow items-center" id="navbarSupportedContentY">
+    <div class="navbar-collapse" id="navbarSupportedContentY">
       <%= render "_user_menu.html", assigns %>
     </div>
   </div>
