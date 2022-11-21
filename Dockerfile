@@ -52,6 +52,8 @@ COPY lib lib
 
 COPY assets assets
 
+RUN npm install --prefix assets
+
 # compile assets
 RUN mix assets.deploy
 
