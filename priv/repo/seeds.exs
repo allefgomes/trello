@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-{:ok, user} =
+{:ok, fulano} =
   %{
     name: "Fulano",
     email: "fulano@example.com",
@@ -18,7 +18,13 @@
   }
   |> Trello.Accounts.register_user()
 
-user = Trello.Repo.one!(Trello.Boards.Creator)
+{:ok, cicrano} =
+  %{
+    name: "Cicrano",
+    email: "cicrano@example.com",
+    password: "1234123412341234"
+  }
+  |> Trello.Accounts.register_user()
 
 ["#0024FF", "#C6960F", "#89609E", "#4F4667", "#FF6600", "#B47393", "#A7515B", "#32181b"]
 |> Enum.map(fn n ->
@@ -27,7 +33,7 @@ user = Trello.Repo.one!(Trello.Boards.Creator)
       name: "Board #{n}",
       active: true,
       background: n,
-      creator_id: user.id
+      creator_id: Enum.random([fulano.id, cicrano.id])
     })
 
   ["To do", "Doing", "Test", "Staging", "Production"]

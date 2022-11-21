@@ -76,6 +76,7 @@ defmodule TrelloWeb.Router do
     get "/", BoardController, :index
     get "/boards/new", BoardController, :new
     post "/boards", BoardController, :create
+    live "/boards/:board_id", BoardLive.Index, :index
   end
 
   scope "/", TrelloWeb do

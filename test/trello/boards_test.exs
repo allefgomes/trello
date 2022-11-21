@@ -15,9 +15,16 @@ defmodule Trello.CardsTest do
     end
 
     test "get_board_by_creator!/1 returns the board with given id and creator_id" do
-      board = board_fixture()
+      created_board = board_fixture()
 
-      assert Boards.get_board_by_creator!(board.id, board.creator_id) == board
+      assert %Board{} =
+               board = Boards.get_board_by_creator!(created_board.id, created_board.creator_id)
+
+      assert created_board.id == board.id
+      assert created_board.name == board.name
+      assert created_board.active == board.active
+      assert created_board.background == board.background
+      assert created_board.creator_id == board.creator_id
     end
 
     test "get_board!/1 returns the board with given id" do

@@ -96,6 +96,7 @@ defmodule Trello.Boards do
     |> where(id: ^id)
     |> where(creator_id: ^creator_id)
     |> Repo.one()
+    |> Repo.preload(lists: :cards)
   end
 
   @doc """
