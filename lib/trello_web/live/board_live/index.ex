@@ -1,7 +1,7 @@
 defmodule TrelloWeb.BoardLive.Index do
   use TrelloWeb, :live_view
 
-  alias Trello.Boards.Entities.Board
+  alias Trello.Boards.Board
 
   @impl true
   def mount(%{"board_id" => board_id}, session, socket) do

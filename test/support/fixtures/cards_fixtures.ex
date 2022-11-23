@@ -14,7 +14,7 @@ defmodule Trello.CardsFixtures do
         description: "Desc",
         list_id: valid_list_id()
       })
-      |> Trello.Boards.create_card()
+      |> Trello.Cards.create_card()
 
     card
   end

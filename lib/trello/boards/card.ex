@@ -1,8 +1,8 @@
-defmodule Trello.Boards.Entities.Card do
+defmodule Trello.Boards.Card do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Trello.Boards.Entities.List
+  alias Trello.Boards.List
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
