@@ -19,11 +19,11 @@ defmodule TrelloWeb.BoardLive.Index do
   @impl true
   def handle_event(
         "dropped",
-        %{"draggedId" => draggedId, "dropzoneId" => dropzoneId},
+        %{"draggedId" => card_id, "dropzoneId" => list_id},
         %{assigns: _assigns} = socket
       ) do
-    Trello.Cards.get_card!(draggedId)
-    |> Trello.Cards.update_card(%{list_id: dropzoneId})
+    Trello.Cards.get_card!(card_id)
+    |> Trello.Cards.update_card(%{list_id: list_id})
 
     {:noreply, socket}
   end
