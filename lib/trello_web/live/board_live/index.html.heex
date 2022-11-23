@@ -1,5 +1,5 @@
 <div class="container px-5 py-2 mx-auto">
-  <h1 class="font-bold text-2xl text-white antialiased pb-2"><%= @board.name %></h1>
+  <h1 class="font-bold text-lg text-white antialiased pb-2"><%= @board.name %></h1>
 
   <div class="container">
     <div class="overflow-x-auto flex space-x-2" phx-hook="Drag" id="drag-id">
@@ -29,7 +29,7 @@
 </div>
 
 <style>
-  body {
-    background-color: <%= @board.background %>;
+  body, #navbar {
+    background-color: <%= @board.background <> "cf" %>;
   }
 </style>
