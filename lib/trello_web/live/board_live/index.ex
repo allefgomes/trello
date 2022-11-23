@@ -1,12 +1,14 @@
 defmodule TrelloWeb.BoardLive.Index do
   use TrelloWeb, :live_view
 
+  alias Trello.Boards.Entities.Board
+
   @impl true
   def mount(%{"board_id" => board_id}, session, socket) do
     current_user = get_current_user(session)
 
     case Trello.Boards.get_board_by_creator!(board_id, current_user.id) do
-      %Trello.Boards.Board{} = board ->
+      %Board{} = board ->
         {:ok, assign(socket, :board, board)}
 
       _ ->

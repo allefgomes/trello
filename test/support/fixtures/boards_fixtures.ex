@@ -38,7 +38,7 @@ defmodule Trello.BoardsFixtures do
   defp valid_creator_id do
     user_created = user_fixture()
 
-    creator = Trello.Repo.get!(Trello.Boards.Creator, user_created.id)
+    creator = Trello.Repo.get!(Trello.Boards.Entities.Creator, user_created.id)
 
     creator.id
   end

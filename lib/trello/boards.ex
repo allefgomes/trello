@@ -6,7 +6,7 @@ defmodule Trello.Boards do
   import Ecto.Query, warn: false
   alias Trello.Repo
 
-  alias Trello.Boards.{Board, Card, List}
+  alias Trello.Boards.Entities.{Board, Card, List}
 
   def create_list(attrs \\ %{}) do
     %List{}

@@ -6,7 +6,7 @@ defmodule Trello.Cards do
   import Ecto.Query, warn: false
   alias Trello.Repo
 
-  alias Trello.Boards.Card
+  alias Trello.Boards.Entities.Card
 
   def get_card!(id), do: Repo.get!(Card, id)
 

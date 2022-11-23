@@ -1,8 +1,9 @@
 defmodule Trello.BoardsTest do
   use Trello.DataCase
 
-  alias Trello.Boards.Card
+  alias Trello.Boards.Entities.Card
   alias Trello.Cards
+
   import Trello.CardsFixtures
 
   describe "cards" do

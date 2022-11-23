@@ -2,7 +2,7 @@ defmodule TrelloWeb.BoardController do
   use TrelloWeb, :controller
 
   alias Trello.Boards
-  alias Trello.Boards.Board
+  alias Trello.Boards.Entities.Board
 
   def index(conn, _params) do
     render(conn, "index.html", boards_of_user: Boards.list_boards(conn.assigns.current_user.id))

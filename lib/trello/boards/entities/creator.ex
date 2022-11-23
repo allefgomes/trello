@@ -1,4 +1,4 @@
-defmodule Trello.Boards.Creator do
+defmodule Trello.Boards.Entities.Creator do
   use Ecto.Schema
 
   @primary_key {:id, :binary_id, autogenerate: true}
