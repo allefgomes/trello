@@ -9,20 +9,20 @@ defmodule TrelloWeb.BoardLiveTest do
   test "should has a div called with id drag-id", %{conn: conn, user: user} do
     board = board_fixture(creator_id: user.id)
 
-    {:ok, view, _html} = live(conn, Routes.board_index_path(conn, :index, board.id))
+    {:ok, view, _html} = live(conn, Routes.board_show_path(conn, :show, board.id))
 
     assert has_element?(view, "div#drag-id")
   end
 
   test "should return error if not found board with an uuid and redirect to '/'", %{conn: conn} do
     assert {:error, {:redirect, %{to: "/"}}} =
-             live(conn, Routes.board_index_path(conn, :index, Ecto.UUID.generate()))
+             live(conn, Routes.board_show_path(conn, :show, Ecto.UUID.generate()))
   end
 
   test "handle_event/3 dropped", %{conn: conn, user: user} do
     board = board_fixture(creator_id: user.id)
 
-    {:ok, view, _html} = live(conn, Routes.board_index_path(conn, :index, board.id))
+    {:ok, view, _html} = live(conn, Routes.board_show_path(conn, :show, board.id))
 
     [todo, production] = [
       list_fixture(board_id: board.id, title: "Todo"),
