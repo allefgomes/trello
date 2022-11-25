@@ -1,0 +1,35 @@
+<div class="container px-5 py-2 mx-auto">
+  <h1 class="font-bold text-lg text-white antialiased pb-2" id="board-title"><%= @board.name %></h1>
+
+  <div class="container">
+    <div class="overflow-x-auto flex space-x-2" phx-hook="Drag" id="drag-id">
+      <%= for list <- @board.lists do %>
+        <div class="rounded justify-center h-min" style="background-color: #ebecf0; width: 250px">
+          <div class="flex m-2 ml-3 justify-between" >
+            <div class="text-black font-bold"><%= list.title %></div>
+          </div>
+
+          <div class="dropzone" id={list.id}>
+            <%= for card <- list.cards do %>
+              <div draggable="true" class="m-2 shadow-lg rounded bg-white min-w-max h-8 draggable" id={card.id}>
+                <h5 class="text-gray-900 pl-2"><%= card.title %></h5>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="min-w-full">
+            <button class="hover:bg-gray-300 w-24 min-w-[94%] p-2 m-2 rounded ">
+              Add Card
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  body, #navbar {
+    background-color: <%= @board.background <> "cf" %>;
+  }
+</style>

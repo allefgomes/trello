@@ -1,7 +1,7 @@
 defmodule Trello.CardsTest do
   use Trello.DataCase
 
-  alias Trello.Boards
+  alias Trello.{Boards, Cards, Lists}
   alias Trello.Boards.{Board, Card, List}
   import Trello.{AccountsFixtures, BoardsFixtures, ListsFixtures}
 
@@ -124,7 +124,7 @@ defmodule Trello.CardsTest do
         board_id: board.id
       }
 
-      assert {:ok, %List{} = list} = Boards.create_list(valid_attrs)
+      assert {:ok, %List{} = list} = Lists.create_list(valid_attrs)
       assert list.title == "Teste"
     end
 
@@ -137,7 +137,7 @@ defmodule Trello.CardsTest do
         list_id: list.id
       }
 
-      assert {:ok, %Card{} = card} = Boards.create_card(valid_attrs)
+      assert {:ok, %Card{} = card} = Cards.create_card(valid_attrs)
       assert card.title == "Teste"
       assert card.description == "Desc"
     end

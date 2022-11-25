@@ -73,10 +73,9 @@ defmodule TrelloWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    get "/", BoardController, :index
-    get "/boards/new", BoardController, :new
-    post "/boards", BoardController, :create
-    live "/boards/:board_id", BoardLive.Index, :index
+    live "/boards/new", BoardLive.Index, :new
+    live "/", BoardLive.Index, :index
+    live "/boards/:board_id", BoardLive.Show, :show
   end
 
   scope "/", TrelloWeb do

@@ -14,7 +14,7 @@ defmodule Trello.ListsFixtures do
         description: "Desc",
         board_id: valid_board_id()
       })
-      |> Trello.Boards.create_list()
+      |> Trello.Lists.create_list()
 
     list
   end

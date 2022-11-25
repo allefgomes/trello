@@ -3,6 +3,7 @@ defmodule Trello.BoardsTest do
 
   alias Trello.Boards.Card
   alias Trello.Cards
+
   import Trello.CardsFixtures
 
   describe "cards" do

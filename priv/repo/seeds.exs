@@ -26,11 +26,11 @@
   }
   |> Trello.Accounts.register_user()
 
-["#0024FF", "#C6960F", "#89609E", "#4F4667", "#FF6600", "#B47393", "#A7515B", "#32181b"]
+["#735185"]
 |> Enum.map(fn n ->
   {:ok, board} =
     Trello.Boards.create_board(%{
-      name: "Board #{n}",
+      name: "Estudos",
       active: true,
       background: n,
       creator_id: Enum.random([fulano.id, cicrano.id])

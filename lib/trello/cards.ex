@@ -15,4 +15,10 @@ defmodule Trello.Cards do
     |> Card.changeset(attrs)
     |> Repo.update()
   end
+
+  def create_card(attrs \\ %{}) do
+    %Card{}
+    |> Card.changeset(attrs)
+    |> Repo.insert()
+  end
 end

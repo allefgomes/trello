@@ -6,19 +6,7 @@ defmodule Trello.Boards do
   import Ecto.Query, warn: false
   alias Trello.Repo
 
-  alias Trello.Boards.{Board, Card, List}
-
-  def create_list(attrs \\ %{}) do
-    %List{}
-    |> List.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  def create_card(attrs \\ %{}) do
-    %Card{}
-    |> Card.changeset(attrs)
-    |> Repo.insert()
-  end
+  alias Trello.Boards.Board
 
   @doc """
   Returns the list of boards.

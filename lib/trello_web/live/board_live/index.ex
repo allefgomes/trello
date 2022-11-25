@@ -1,32 +1,40 @@
 defmodule TrelloWeb.BoardLive.Index do
   use TrelloWeb, :live_view
 
+  alias Trello.Boards
+  alias TrelloWeb.BoardLive.FormComponent
+
   @impl true
-  def mount(%{"board_id" => board_id}, session, socket) do
-    current_user = get_current_user(session)
+  def mount(params, session, socket) do
+    current_user = Trello.Accounts.get_user_by_session_token(session["user_token"])
 
-    case Trello.Boards.get_board_by_creator!(board_id, current_user.id) do
-      %Trello.Boards.Board{} = board ->
-        {:ok, assign(socket, :board, board)}
+    socket =
+      socket
+      |> assign(user_token: session["user_token"])
+      |> assign(current_user: current_user)
 
-      _ ->
-        {:ok, redirect(socket, to: "/")}
-    end
+    {:ok, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   @impl true
-  def handle_event(
-        "dropped",
-        %{"draggedId" => draggedId, "dropzoneId" => dropzoneId},
-        %{assigns: _assigns} = socket
-      ) do
-    Trello.Cards.get_card!(draggedId)
-    |> Trello.Cards.update_card(%{list_id: dropzoneId})
-
-    {:noreply, socket}
+  def handle_params(params, _uri, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp get_current_user(session) do
-    Trello.Accounts.get_user_by_session_token(session["user_token"])
+  defp apply_action(socket, :new, _params) do
+    socket
+    |> assign(board: %Trello.Boards.Board{})
+    |> assign(page_title: "New Board | Trello")
+    |> assign(changeset: %Trello.Boards.Board{})
+    |> assign(boards_of_user: Boards.list_boards(socket.assigns.current_user.id))
+    |> assign(current_user: socket.assigns.current_user)
+  end
+
+  defp apply_action(socket, :index, _params) do
+    socket
+    |> assign(:boards_of_user, Boards.list_boards(socket.assigns.current_user.id))
+    |> assign(:user_token, socket.assigns.user_token)
+    |> assign(:page_title, "Trello Boards")
+    |> assign(current_user: socket.assigns.current_user)
   end
 end
