@@ -13,7 +13,8 @@
     <% end  %>
 
     <%= live_patch(to: Routes.board_index_path(@socket, :new),
-        class: "h-24 rounded bg-gray-100 flex items-center justify-center hover:bg-gray-200") do %>
+        class: "h-24 rounded bg-gray-100 flex items-center justify-center hover:bg-gray-200",
+        "data-role": "add-new-board") do %>
           <p class="text-base text-black">Create new board</p>
       <% end %>
   </div>
