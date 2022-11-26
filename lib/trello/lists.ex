@@ -13,4 +13,8 @@ defmodule Trello.Lists do
     |> List.changeset(attrs)
     |> Repo.insert()
   end
+
+  def change_list(%List{} = list, attrs \\ %{}) do
+    List.changeset(list, attrs)
+  end
 end

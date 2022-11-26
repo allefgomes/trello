@@ -1,10 +1,10 @@
-<div class="container px-5 py-2 mx-auto">
-  <h1 class="font-bold text-lg text-white antialiased pb-2" id="board-title"><%= @board.name %></h1>
+<div class="container-fluid">
+  <h1 class="font-bold text-xl text-white antialiased pb-2 pt-5 px-5" id="board-title"><%= @board.name %></h1>
 
-  <div class="container">
-    <div class="overflow-x-auto flex space-x-2" phx-hook="Drag" id="drag-id">
+  <div class="container-fluid h-screen overflow-x-auto px-5 min-w-full">
+    <div class="flex space-x-2" phx-hook="Drag" id="drag-id">
       <%= for list <- @board.lists do %>
-        <div class="rounded justify-center h-min" style="background-color: #ebecf0; width: 250px">
+        <div class="rounded justify-center h-min w-20 min-w-[20%]" style="background-color: #ebecf0;">
           <div class="flex m-2 ml-3 justify-between" >
             <div class="text-black font-bold"><%= list.title %></div>
           </div>
@@ -24,6 +24,8 @@
           </div>
         </div>
       <% end %>
+
+      <.live_component module={TrelloWeb.BoardLive.Components.AddListButton} id="add-new-list" board={@board}/>
     </div>
   </div>
 </div>

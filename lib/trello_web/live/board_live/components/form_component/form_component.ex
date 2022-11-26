@@ -1,4 +1,4 @@
-defmodule TrelloWeb.BoardLive.FormComponent do
+defmodule TrelloWeb.BoardLive.Components.FormComponent do
   use TrelloWeb, :live_component
 
   alias Trello.Boards.Board

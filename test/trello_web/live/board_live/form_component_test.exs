@@ -1,4 +1,4 @@
-defmodule TrelloWeb.BoardLive.FormComponentTest do
+defmodule TrelloWeb.BoardLive.Components.FormComponentTest do
   use TrelloWeb.ConnCase
 
   import Phoenix.LiveViewTest

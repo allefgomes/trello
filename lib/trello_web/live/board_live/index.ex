@@ -2,10 +2,10 @@ defmodule TrelloWeb.BoardLive.Index do
   use TrelloWeb, :live_view
 
   alias Trello.Boards
-  alias TrelloWeb.BoardLive.FormComponent
+  alias TrelloWeb.BoardLive.Components.FormComponent
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     current_user = Trello.Accounts.get_user_by_session_token(session["user_token"])
 
     socket =
@@ -13,7 +13,7 @@ defmodule TrelloWeb.BoardLive.Index do
       |> assign(user_token: session["user_token"])
       |> assign(current_user: current_user)
 
-    {:ok, apply_action(socket, socket.assigns.live_action, params)}
+    {:ok, socket}
   end
 
   @impl true
