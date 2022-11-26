@@ -20,5 +20,6 @@ defmodule Trello.Boards.List do
   def changeset(list, attrs) do
     list
     |> cast(attrs, [:title, :board_id])
+    |> validate_required([:title, :board_id])
   end
 end

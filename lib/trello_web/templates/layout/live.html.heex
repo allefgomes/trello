@@ -1,11 +1,18 @@
-<main class="container">
-  <p class="alert alert-info" role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+<main class="container-fluid">
+  <%= if live_flash(@flash, :info) do %>
+    <p
+      class="bg-blue-100 rounded-lg py-5 px-6 mb-4 text-base text-blue-700 m-3"
+      role="alert"
+      phx-click="lv:clear-flash"
+    ><%= live_flash(@flash, :info) %></p>
+  <% end %>
 
-  <p class="alert alert-danger" role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+  <%= if live_flash(@flash, :error) do %>
+    <p
+      class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 m-3"role="alert"
+      phx-click="lv:clear-flash"
+    ><%= live_flash(@flash, :error) %></p>
+  <% end %>
 
   <%= @inner_content %>
 </main>
