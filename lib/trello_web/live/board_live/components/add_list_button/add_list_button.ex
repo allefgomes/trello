@@ -16,20 +16,24 @@ defmodule TrelloWeb.BoardLive.Components.AddListButton do
   end
 
   @impl true
-  def handle_event("validate-new-list", %{ "list" => list_params }, socket) do
+  def handle_event("validate-new-list", %{"list" => list_params}, socket) do
     changeset =
       socket.assigns.list
-      |> Trello.Lists.change_list(Map.merge(list_params, %{"board_id" => socket.assigns.board.id}))
+      |> Trello.Lists.change_list(
+        Map.merge(list_params, %{"board_id" => socket.assigns.board.id})
+      )
       |> Map.put(:action, :validate)
 
     {:noreply,
-      socket
-      |> assign(changeset: changeset)}
+     socket
+     |> assign(changeset: changeset)}
   end
 
   @impl true
   def handle_event("save-new-list", %{"list" => list_params}, socket) do
-    case Trello.Lists.create_list(Map.merge(list_params, %{"board_id" => socket.assigns.board.id})) do
+    case Trello.Lists.create_list(
+           Map.merge(list_params, %{"board_id" => socket.assigns.board.id})
+         ) do
       {:ok, list} ->
         {:noreply,
          socket
