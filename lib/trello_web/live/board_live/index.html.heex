@@ -3,10 +3,10 @@
     <h1 class="font-bold text-2xl antialiased">Your Boards</h1>
   </div>
 
-  <div class="grid grid-cols-6 gap-2">
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
     <%= for board <- @boards_of_user do %>
       <%= link(to: Routes.board_show_path(@socket, :show, board.id),
-        class: "rounded bg-gray-400 flex h-24 pl-2 pt-2",
+        class: "rounded flex h-24 pl-2 pt-2",
         style: "background-color: #{board.background}") do %>
         <p class="text-base font-semibold text-white"><%= board.name %></p>
       <% end %>
