@@ -24,7 +24,6 @@ defmodule Trello.Cards do
     Card.changeset(card, attrs)
   end
 
-
   def create_card(attrs \\ %{}) do
     %Card{}
     |> Card.changeset(attrs)
