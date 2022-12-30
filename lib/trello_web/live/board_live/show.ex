@@ -13,7 +13,7 @@ defmodule TrelloWeb.BoardLive.Show do
         {:ok,
          socket
          |> assign(:board, board)
-         |> assign(:page_title, board.name <> "| Trello")
+         |> assign(:page_title, board.name <> " | Trello")
          |> assign(:new_card, Trello.Cards.change_card(%Trello.Boards.Card{}))}
 
       _ ->
