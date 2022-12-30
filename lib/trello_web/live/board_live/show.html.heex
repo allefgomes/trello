@@ -4,26 +4,27 @@
   <div class="container-fluid h-screen overflow-x-auto px-5 min-w-full">
     <div class="flex space-x-2" phx-hook="Drag" id="drag-id">
       <%= for list <- @board.lists do %>
-        <div class="rounded justify-center h-min max-w-md w-[100%] sm:min-w-[100%] md:min-w-[40%] lg:min-w-[25%] xl:min-w-[13%] bg-[#ebecf0]">
-          <div class="flex m-2 ml-3 justify-between" >
+        <div class="rounded justify-center h-min w-60 min-w-60 bg-[#ebecf0]">
+          <div class="flex m-2 ml-3 justify-between list-title">
             <div class="text-black font-bold"><%= list.title %></div>
           </div>
 
-          <div class="dropzone" id={list.id}>
+          <div class="dropzone list-dropzone" id={list.id}>
             <%= for card <- list.cards do %>
-              <div draggable="true" class="m-2 shadow-lg rounded bg-white min-w-max h-8 draggable" id={card.id}>
-                <h5 class="text-gray-900 pl-2"><%= card.title %></h5>
+              <div draggable="true" class="m-2 shadow-lg rounded bg-white h-10 draggable" id={card.id}>
+                <h5 class="text-gray-900 pl-2 pt-2 truncate"><%= card.title %></h5>
               </div>
             <% end %>
+          </div>
 
+          <div class="list-footer">
             <.form let={f} for={@new_card} id={"new-card-#{list.id}"} phx-submit="save-new-card" phx-change="validate-new-card" style="display: none;">
-              <div draggable="false" class="m-2 shadow-lg rounded bg-white min-w-max h-8 draggable">
+              <div draggable="false" class="m-2 shadow-lg rounded bg-white h-8 draggable">
                 <div class="form-outline mb-6">
                   <%= text_input f, :title,
                     class: "form-control
+                      w-56
                       block
-                      w-full
-                      text-xl
                       font-normal
                       text-gray-700
                       bg-white
@@ -34,7 +35,6 @@
                       rounded
                       transition
                       ease-in-out
-                      m-0
                       focus:text-gray-700
                       focus:bg-white
                       focus:border-blue-600
@@ -48,17 +48,17 @@
             </.form>
           </div>
 
-          <div class="min-w-full">
-            <.live_component
-              module={TrelloWeb.BoardLive.Components.AddCardComponent}
+          <div class="w-60">
+            <.live_component module={TrelloWeb.BoardLive.Components.AddCardComponent}
               id={"add-card-#{list.id}"}
-              list_id={list.id}
-            />
+              list_id={list.id} />
           </div>
         </div>
       <% end %>
 
-      <.live_component module={TrelloWeb.BoardLive.Components.AddListButton} id="add-new-list" board={@board}/>
+      <.live_component module={TrelloWeb.BoardLive.Components.AddListButton}
+        id="add-new-list"
+        board={@board} />
     </div>
   </div>
 </div>
