@@ -4,8 +4,7 @@
   <div class="container-fluid h-screen overflow-x-auto px-5 min-w-full">
     <div class="flex space-x-2" phx-hook="Drag" id="drag-id">
       <%= for list <- @board.lists do %>
-        <%# grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 %>
-        <div class="rounded justify-center h-min max-w-md mx-auto w-[100%] sm:min-w-[100%] md:min-w-[40%] lg:min-w-[25%] xl:min-w-[13%] bg-[#ebecf0]">
+        <div class="rounded justify-center h-min max-w-md w-[100%] sm:min-w-[100%] md:min-w-[40%] lg:min-w-[25%] xl:min-w-[13%] bg-[#ebecf0]">
           <div class="flex m-2 ml-3 justify-between" >
             <div class="text-black font-bold"><%= list.title %></div>
           </div>
