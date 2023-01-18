@@ -11,41 +11,16 @@
 
           <div class="dropzone list-dropzone" id={list.id}>
             <%= for card <- list.cards do %>
-              <div draggable="true" class="m-2 shadow-lg rounded bg-white h-10 draggable" id={card.id}>
-                <h5 class="text-gray-900 pl-2 pt-2 truncate"><%= card.title %></h5>
-              </div>
+              <.live_component module={TrelloWeb.BoardLive.Components.Card} id={card.id} card={card} />
             <% end %>
           </div>
 
           <div class="list-footer">
-            <.form let={f} for={@new_card} id={"new-card-#{list.id}"} phx-submit="save-new-card" phx-change="validate-new-card" style="display: none;">
-              <div draggable="false" class="m-2 shadow-lg rounded bg-white h-8 draggable">
-                <div class="form-outline mb-6">
-                  <%= text_input f, :title,
-                    class: "form-control
-                      w-56
-                      block
-                      font-normal
-                      text-gray-700
-                      bg-white
-                      bg-clip-padding
-                      border
-                      border-solid
-                      border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      focus:text-gray-700
-                      focus:bg-white
-                      focus:border-blue-600
-                      focus:outline-none",
-                    required: true %>
-
-                  <%= hidden_input f, :list_id, value: list.id %>
-                  <br/>
-                </div>
-              </div>
-            </.form>
+            <.live_component module={TrelloWeb.BoardLive.Components.FormCard}
+              id={"new-card-#{list.id}"}
+              list={list}
+              new_card={@new_card}
+            />
           </div>
 
           <div class="w-60">

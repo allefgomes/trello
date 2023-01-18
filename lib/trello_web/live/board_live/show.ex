@@ -51,7 +51,8 @@ defmodule TrelloWeb.BoardLive.Show do
   def handle_event("validate-new-card", %{"card" => card_params}, socket) do
     card = Trello.Cards.new(card_params)
 
-    {:noreply, socket}
+    {:noreply, socket
+  |> assign(:card, card)}
   end
 
   defp get_current_user(session) do
